@@ -1,3 +1,4 @@
 # created by virtualenv automatically
 my_env/**
 *.db
+*.pem
