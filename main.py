@@ -106,6 +106,8 @@ for url_data in urls:
 
                 if cmr_price != last_cmr_price or internet_price != last_internet_price or normal_price != last_normal_price:
                     insert_consulta_and_historico_precios(cursor, conn, url_id, cmr_price, internet_price, normal_price)
+                else:
+                    os.system(f'termux-notification --title "Ninguna oferta encontrada" --content "Ninguna oferta encontrada"')
         else:
             print(f"No se encontró el contenedor de precios en la URL {url}.")
     else:
