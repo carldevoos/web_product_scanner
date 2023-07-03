@@ -11,6 +11,11 @@ db_user = os.environ.get('DB_USER')
 db_password = os.environ.get('DB_PASSWORD')
 db_name = os.environ.get('DB_NAME')
 
+db_name="dev-planetscale"
+db_user="iec7f536n8md6si6pz4y"
+db_password="pscale_pw_YGR6Iq9XNxtPUjuiOJW6tRAmHjexHnFbJO4znYJfkvu"
+db_host="aws.connect.psdb.cloud"
+
 # Conectarse a la base de datos MySQL
 conn = mysql.connector.connect(
     host=db_host,
@@ -81,6 +86,11 @@ for url_data in urls:
                 internet_price = next((container.find(attrs={attr: True}).get(attr) for attr in data_attribute["internet"] if container.find(attrs={attr: True})), None)
                 normal_price = next((container.find(attrs={attr: True}).get(attr) for attr in data_attribute["normal"] if container.find(attrs={attr: True})), None)
                 
+                # Se convierte los precios a float
+                cmr_price = float(cmr_price.replace(',', '')) if cmr_price else None
+                internet_price = float(internet_price.replace(',', '')) if internet_price else None
+                normal_price = float(normal_price.replace(',', '')) if normal_price else None
+
                 if not last_prices:
                     insert_consulta_and_historico_precios(cursor, conn, url_id, cmr_price, internet_price, normal_price)
                     break

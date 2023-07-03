@@ -3,3 +3,4 @@ my_env/**
 venv/**
 *.db
 *.pem
+credentials
