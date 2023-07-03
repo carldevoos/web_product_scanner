@@ -11,11 +11,6 @@ db_user = os.environ.get('DB_USER')
 db_password = os.environ.get('DB_PASSWORD')
 db_name = os.environ.get('DB_NAME')
 
-db_name="dev-planetscale"
-db_user="iec7f536n8md6si6pz4y"
-db_password="pscale_pw_YGR6Iq9XNxtPUjuiOJW6tRAmHjexHnFbJO4znYJfkvu"
-db_host="aws.connect.psdb.cloud"
-
 # Conectarse a la base de datos MySQL
 conn = mysql.connector.connect(
     host=db_host,
