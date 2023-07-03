@@ -4,6 +4,7 @@ import mysql.connector
 from datetime import datetime
 import os
 
+print(f"Init script - #{datetime.now()}")
 # Obtener las credenciales de acceso a la base de datos desde variables de entorno
 db_host = os.environ.get('DB_HOST')
 db_user = os.environ.get('DB_USER')
@@ -106,12 +107,15 @@ for url_data in urls:
 
                 if cmr_price != last_cmr_price or internet_price != last_internet_price or normal_price != last_normal_price:
                     insert_consulta_and_historico_precios(cursor, conn, url_id, cmr_price, internet_price, normal_price)
-                else:
-                    os.system(f'termux-notification --title "Ninguna oferta encontrada" --content "Ninguna oferta encontrada"')
+                #else:
+                #    os.system(f'termux-notification --title "Ninguna oferta encontrada" --content "Ninguna oferta encontrada"')
         else:
             print(f"No se encontró el contenedor de precios en la URL {url}.")
+            os.system(f'termux-notification --title "Error contenedor de precios: ${url_id}" --action "xdg-open ${url}"')
     else:
         print(f"No se pudo acceder a la URL {url}. Verifica la conexión a Internet.")
+        os.system(f'termux-notification --title "Error URL: ${url_id}" --action "xdg-open ${url}"')
 
 # Cerrar la conexión
 conn.close()
+print(f"Finish script - #{datetime.now()}")
