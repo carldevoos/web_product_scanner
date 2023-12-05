@@ -36,13 +36,15 @@ def insert_consulta_and_historico_precios(cursor, conn, url_id, cmr_price, inter
     conn.commit()
 
 # Obtener todas las URLs de la tabla 'urls'
-cursor.execute('SELECT id, url FROM urls')
+cursor.execute('SELECT id, url, status FROM urls')
 urls = cursor.fetchall()
 
 # Recorrer todas las URLs
 for url_data in urls:
-    url_id, url = url_data
-
+    url_id, url, status = url_data
+    if not status:
+        continue
+    
     # Realizar la solicitud HTTP
     response = requests.get(url)
 
